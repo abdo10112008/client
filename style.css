@@ -1,0 +1,398 @@
+/* ===== إعدادات أساسية ===== */
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 30px;
+}
+
+/* ===== إخفاء العناصر ===== */
+.hidden {
+  display: none;
+}
+
+/* ===== العناوين ===== */
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+/* ===== شاشة تسجيل الدخول ===== */
+.login {
+  max-width: 320px;
+  margin: 100px auto;
+  background: #1e293b;
+  padding: 25px 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.login input,
+.login button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.login button {
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login button:hover {
+  background: #1d4ed8;
+}
+
+/* ===== إضافة عميل ===== */
+.add-client {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 25px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.add-client input,
+.add-client button {
+  padding: 12px;
+  margin: 6px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.add-client button {
+  background: #22c55e;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-client button:hover {
+  background: #16a34a;
+  transform: scale(1.05);
+}
+
+/* ===== الكروت ===== */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  width: 280px;
+  background: #020617;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* حالة الكارت حسب الأيام */
+.card.danger { border-left: 5px solid #ef4444; }   /* أحمر */
+.card.warn   { border-left: 5px solid #f97316; }   /* برتقالي */
+.card.info   { border-left: 5px solid #3b82f6; }   /* أزرق */
+
+/* ===== أزرار رفع الملفات ===== */
+.upload-btn {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.upload-btn.voice {
+  background: #2563eb;
+  color: white;
+}
+
+.upload-btn.voice:hover {
+  background: #1e40af;
+}
+
+.upload-btn.call {
+  background: #dc2626;
+  color: white;
+}
+
+.upload-btn.call:hover {
+  background: #b91c1c;
+}
+
+/* ===== الكروت المحسنة ===== */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px; /* مسافة أكبر بين الكروت */
+  justify-content: center;
+}
+
+.card {
+  width: 300px; /* أكبر شوية للكارت */
+  background: #0a0f22; /* خلفية أفتح قليلاً */
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* مسافة بين عناصر الكارت */
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.9);
+}
+
+/* ===== بيانات العميل ===== */
+.card h3 {
+  margin-bottom: 5px;
+  font-size: 1.25rem;
+  color: #f1f5f9;
+}
+
+.card p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+/* ===== التنبيهات ===== */
+.alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.alert-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e293b;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.alert-box button {
+  background: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.alert-box button:hover {
+  background: #16a34a;
+}
+
+/* ===== رفع الملفات ===== */
+.upload-btn {
+  display: block;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.upload-btn.voice {
+  background: #2563eb;
+  color: white;
+}
+
+.upload-btn.voice:hover {
+  background: #1e40af;
+}
+
+.upload-btn.call {
+  background: #dc2626;
+  color: white;
+}
+
+.upload-btn.call:hover {
+  background: #b91c1c;
+}
+
+/* ===== عناصر الكارت ===== */
+.card{
+  margin-top: 50px;
+ margin-left: 30px;
+}
+
+
+audio {
+  width: 100%;
+  margin-top: 8px;
+  border-radius: 8px;
+}
+
+textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #1e293b;
+  color: white;
+  border: none;
+  resize: none;
+  font-size: 0.95rem;
+}
+
+/* ===== المبالغ ===== */
+input.newAmount {
+  width: calc(100% - 24px);
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+}
+
+button.addAmountBtn {
+  background: #22c55e;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+button.addAmountBtn:hover {
+  background: #16a34a;
+}
+
+/* ===== تم الدفع بالكامل ===== */
+button.doneBtn {
+  background: #ef4444;
+  color: white;
+  font-weight: bold;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button.doneBtn:hover {
+  background: #b91c1c;
+}
+
+/* ===== حالة الكارت حسب الأيام ===== */
+.card.danger { border-left: 6px solid #ef4444; }
+.card.warn   { border-left: 6px solid #f97316; }
+.card.info   { border-left: 6px solid #3b82f6; }
+
+/* ===== استجابة الموبايل ===== */
+@media (max-width: 350px) {
+  .card {
+    width: 95%;
+  }
+}
+
+
+
+/* ===== خانة البحث ===== */
+.search-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+#searchInput:focus {
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.7);
+}
+
+
+
+
+/* ===== قسم الإحصائيات ===== */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  flex: 1 1 140px;
+  min-width: 120px;
+  background: #1e293b;
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transition: transform 0.2s, background 0.3s;
+}
+
+.stat-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.stat-card p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+/* ألوان حسب الحالة */
+.stat-card.info { border-top: 4px solid #3b82f6; }     /* أزرق */
+.stat-card.warn { border-top: 4px solid #f97316; }     /* برتقالي */
+.stat-card.danger { border-top: 4px solid #ef4444; }   /* أحمر */
+.stat-card.total-paid { border-top: 4px solid #22c55e; } /* أخضر */
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  background: #293449;
+}

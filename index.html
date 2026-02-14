@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>لوحة متابعة العملاء</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- شاشة الدخول -->
+<div id="loginScreen" class="login">
+  <h2>تسجيل الدخول</h2>
+  <input id="password" type="password" placeholder="كلمة السر" />
+  <button id="loginBtn">دخول</button>
+</div>
+
+<!-- التطبيق -->
+<div id="app" class="app hidden">
+  <h1>📋 لوحة متابعة العملاء</h1>
+
+  <!-- إضافة عميل -->
+  <div class="add-client">
+    <input id="name" type="text" placeholder="اسم العميل">
+    <input id="phone" type="text" placeholder="رقم الهاتف">
+    <input id="date" type="date">
+    <button id="addBtn">➕ إضافة</button>
+  </div>
+
+  <!-- خانة البحث -->
+  <div class="search-container">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="🔍 ابحث بالاسم أو رقم التليفون"
+    />
+  </div>
+ 
+
+
+
+
+
+
+
+
+
+<!-- ===== إحصائيات العملاء ===== -->
+<div id="stats" class="stats">
+  <div class="stat-card">
+    <h3 id="totalClients">0</h3>
+    <p>عدد العملاء الكلي</p>
+  </div>
+  <div class="stat-card info">
+    <h3 id="clients7">0</h3>
+    <p>أقل من 7 أيام</p>
+  </div>
+  <div class="stat-card warn">
+    <h3 id="clients15">0</h3>
+    <p>7 - 15 يوم</p>
+  </div>
+  <div class="stat-card danger">
+    <h3 id="clients30">0</h3>
+    <p>15 - 30 يوم</p>
+  </div>
+  <div class="stat-card danger">
+    <h3 id="clients30plus">0</h3>
+    <p>أكثر من 30 يوم</p>
+  </div>
+  <div class="stat-card total-paid">
+    <h3 id="totalPaid">0</h3>
+    <p>إجمالي المدفوعات</p>
+  </div>
+</div>
+
+
+
+
+
+  <!-- الكروت -->
+  <div id="cards" class="cards"></div>
+</div>
+
+
+
+ 
+
+
+
+
+
+
+
+<script src="tebaa.js" defer></script>
+</body>
+</html>
