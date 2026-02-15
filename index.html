@@ -88,8 +88,42 @@
 
 
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBJ72idk41gt-TqwKFUS6bT5UFiTlbyokg",
+    authDomain: "client-a532d.firebaseapp.com",
+    projectId: "client-a532d",
+    storageBucket: "client-a532d.firebasestorage.app",
+    messagingSenderId: "729512941588",
+    appId: "1:729512941588:web:253b603f661b7eda3eef01"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.db = db;
+</script>
+
+<script src="tebaa.js" defer></script>
+
+
+</body>
+
+</body>
+</html>
+
+ 
+
+
+
+
+
 
 
 <script src="tebaa.js" defer></script>
 </body>
 </html>
+
