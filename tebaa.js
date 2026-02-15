@@ -12,6 +12,8 @@ const cards = document.getElementById("cards");
 
 const searchInput = document.getElementById("searchInput");
 
+let clients = [];
+
 // ===== تسجيل الدخول =====
 loginBtn.onclick = () => {
   if (passwordInput.value.trim() === "1234") {
@@ -22,13 +24,7 @@ loginBtn.onclick = () => {
   }
 };
 
-// ===== البيانات =====
-let clients = JSON.parse(localStorage.getItem("clients") || "[]");
-
-function save() {
-  localStorage.setItem("clients", JSON.stringify(clients));
-}
-
+// ===== دوال مساعدة =====
 function daysFrom(dateStr) {
   const d = new Date(dateStr);
   const now = new Date();
@@ -71,6 +67,20 @@ function getAlerts(days, alertHandled) {
   return alerts;
 }
 
+// ===== تحميل البيانات لايف من Firestore =====
+async function startRealtimeListener() {
+  const { collection, onSnapshot } =
+    await import("https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js");
+
+  onSnapshot(collection(window.db, "clients"), (snapshot) => {
+    clients = [];
+    snapshot.forEach((doc) => {
+      clients.push({ id: doc.id, ...doc.data() });
+    });
+    render();
+  });
+}
+
 // ===== رسم الكروت =====
 function render() {
   cards.innerHTML = "";
@@ -84,9 +94,8 @@ function render() {
 
   filteredClients = sortClientsByDays(filteredClients);
 
-  filteredClients.forEach((c, i) => {
+  filteredClients.forEach((c) => {
     const days = daysFrom(c.date);
-
     if (!c.alertHandled) c.alertHandled = {};
 
     const card = document.createElement("div");
@@ -96,15 +105,11 @@ function render() {
       <h3>${c.name}</h3>
       <p>📞 ${c.phone}</p>
       <p>⏱ منذ ${days} يوم</p>
-
       <div class="alerts"></div>
-
       <textarea placeholder="ملاحظات">${c.notes || ""}</textarea>
-
       <p>💰 إجمالي المدفوع: <span class="total">${c.totalPaid || 0}</span> جنيه</p>
       <input type="number" class="newAmount" placeholder="المبلغ الجديد">
       <button class="addAmountBtn">💵 إضافة المبلغ</button>
-
       <button class="doneBtn">✅ تم الدفع بالكامل</button>
     `;
 
@@ -119,34 +124,47 @@ function render() {
         <button class="alertDoneBtn">تم</button>
       `;
 
-      alertBox.querySelector(".alertDoneBtn").onclick = () => {
+      alertBox.querySelector(".alertDoneBtn").onclick = async () => {
+        const { doc, updateDoc } =
+          await import("https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js");
+
         c.alertHandled[a.key] = true;
-        save();
-        render();
+
+        await updateDoc(doc(window.db, "clients", c.id), {
+          alertHandled: c.alertHandled
+        });
       };
 
       alertsDiv.appendChild(alertBox);
     });
 
-    card.querySelector("textarea").oninput = (e) => {
-      c.notes = e.target.value;
-      save();
+    card.querySelector("textarea").oninput = async (e) => {
+      const { doc, updateDoc } =
+        await import("https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js");
+
+      await updateDoc(doc(window.db, "clients", c.id), {
+        notes: e.target.value
+      });
     };
 
-    card.querySelector(".addAmountBtn").onclick = () => {
+    card.querySelector(".addAmountBtn").onclick = async () => {
+      const { doc, updateDoc } =
+        await import("https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js");
+
       const val = parseFloat(card.querySelector(".newAmount").value);
       if (isNaN(val) || val <= 0) return alert("اكتب مبلغ صحيح");
 
-      c.totalPaid = (c.totalPaid || 0) + val;
-      save();
-      render();
+      await updateDoc(doc(window.db, "clients", c.id), {
+        totalPaid: (c.totalPaid || 0) + val
+      });
     };
 
-    card.querySelector(".doneBtn").onclick = () => {
+    card.querySelector(".doneBtn").onclick = async () => {
+      const { doc, deleteDoc } =
+        await import("https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js");
+
       if (confirm("⚠️ هل أنت متأكد؟")) {
-        clients = clients.filter(x => x !== c);
-        save();
-        render();
+        await deleteDoc(doc(window.db, "clients", c.id));
       }
     };
 
@@ -157,23 +175,31 @@ function render() {
 }
 
 // ===== إضافة عميل =====
-addBtn.onclick = () => {
+addBtn.onclick = async () => {
+  const { collection, addDoc } =
+    await import("https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js");
+
   const name = nameInput.value.trim();
   const phone = phoneInput.value.trim();
   const date = dateInput.value;
 
   if (!name || !phone || !date) return alert("املأ كل الحقول");
 
-  clients.push({ name, phone, date });
-  save();
-  render();
+  await addDoc(collection(window.db, "clients"), {
+    name,
+    phone,
+    date,
+    totalPaid: 0,
+    notes: "",
+    alertHandled: {}
+  });
 
   nameInput.value = "";
   phoneInput.value = "";
   dateInput.value = "";
 };
 
-// ===== السيرش لايف =====
+// ===== السيرش =====
 searchInput.oninput = () => {
   render();
 };
@@ -201,4 +227,4 @@ function updateStats() {
 }
 
 // ===== تشغيل =====
-render();
+startRealtimeListener();
