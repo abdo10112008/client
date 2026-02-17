@@ -396,3 +396,38 @@ button.doneBtn:hover {
   transform: translateY(-3px);
   background: #293449;
 }
+
+/* ===== أزرار التواصل ===== */
+.contact-buttons {
+display: flex;
+gap: 10px;
+margin-top: 5px;
+}
+
+.contact-buttons a {
+flex: 1;
+text-align: center;
+padding: 8px;
+border-radius: 8px;
+text-decoration: none;
+color: white;
+font-weight: bold;
+font-size: 0.9rem;
+transition: 0.3s;
+}
+
+.whatsapp-btn {
+background: #25D366;
+}
+
+.whatsapp-btn:hover {
+background: #1ebe5d;
+}
+
+.call-btn {
+background: #2563eb;
+}
+
+.call-btn:hover {
+background: #1d4ed8;
+}
