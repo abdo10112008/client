@@ -196,3 +196,64 @@ const noteValue = card.querySelector("textarea").value;
         await deleteDoc(doc(window.db, "clients", c.id));
       }
     };
+
+    cards.appendChild(card);
+  });
+
+  updateStats();
+}
+
+// ===== إضافة عميل =====
+addBtn.onclick = async () => {
+  const { collection, addDoc } =
+    await import("https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js");
+
+  const name = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const date = dateInput.value;
+
+  if (!name || !phone || !date) return alert("املأ كل الحقول");
+
+  await addDoc(collection(window.db, "clients"), {
+    name,
+    phone,
+    date,
+    totalPaid: 0,
+    notes: "",
+    alertHandled: {}
+  });
+
+  nameInput.value = "";
+  phoneInput.value = "";
+  dateInput.value = "";
+};
+
+// ===== السيرش =====
+searchInput.oninput = () => {
+  render();
+};
+
+function updateStats() {
+  const totalClients = clients.length;
+  let clients7 = 0, clients15 = 0, clients30 = 0, clients30plus = 0, totalPaid = 0;
+
+  clients.forEach(c => {
+    const days = daysFrom(c.date);
+    totalPaid += c.totalPaid || 0;
+
+    if (days < 7) clients7++;
+    else if (days < 15) clients15++;
+    else if (days <= 30) clients30++;
+    else clients30plus++;
+  });
+
+  document.getElementById("totalClients").innerText = totalClients;
+  document.getElementById("clients7").innerText = clients7;
+  document.getElementById("clients15").innerText = clients15;
+  document.getElementById("clients30").innerText = clients30;
+  document.getElementById("clients30plus").innerText = clients30plus;
+  document.getElementById("totalPaid").innerText = totalPaid;
+}
+
+// ===== تشغيل =====
+startRealtimeListener();
